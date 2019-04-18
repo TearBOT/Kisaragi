@@ -1,0 +1,13 @@
+image: Visual Studio 2017
+
+before_build:
+- nuget restore
+- choco install opencover.portable
+- choco install codecov
+
+build:
+  project: Kisaragi.sln
+
+test_script:
+- OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\Kisaragi-UnitTests\bin\Debug\Kisaragi-UnitTests.dll -noshadow" -filter:"+[Kisaragi*]* -[Kisaragi-UnitTests*]*" -output:".\coverage.xml"
+- codecov -f "coverage.xml"
