@@ -3,9 +3,9 @@ using Discord.Commands;
 using DiscordUtils;
 using System.Threading.Tasks;
 
-namespace Kisaragi
+namespace Kisaragi.Modules
 {
-    class CommunicationModule : ModuleBase
+    class Communication : ModuleBase
     {
         [Command("Info")]
         private async Task Info()

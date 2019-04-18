@@ -34,7 +34,8 @@ namespace Kisaragi
         {
             client.MessageReceived += HandleCommandAsync;
 
-            await commands.AddModuleAsync<CommunicationModule>(null);
+            await commands.AddModuleAsync<Modules.Communication>(null);
+            await commands.AddModuleAsync<Modules.AzurLane>(null);
 
             await client.LoginAsync(TokenType.Bot, File.ReadAllText("Keys/token.txt"));
             StartTime = DateTime.Now;
@@ -48,7 +49,7 @@ namespace Kisaragi
             SocketUserMessage msg = arg as SocketUserMessage;
             if (msg == null || arg.Author.IsBot) return;
             int pos = 0;
-            if (msg.HasMentionPrefix(client.CurrentUser, ref pos) || msg.HasStringPrefix("n.", ref pos))
+            if (msg.HasMentionPrefix(client.CurrentUser, ref pos) || msg.HasStringPrefix("k.", ref pos))
             {
                 SocketCommandContext context = new SocketCommandContext(client, msg);
                 await commands.ExecuteAsync(context, pos, null);
