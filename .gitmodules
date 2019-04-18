@@ -1,0 +1,3 @@
+[submodule "Kisaragi/Discord-Utils"]
+	path = Kisaragi/Discord-Utils
+	url = https://github.com/Xwilarg/Discord-Utils
