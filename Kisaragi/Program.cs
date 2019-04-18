@@ -10,8 +10,8 @@ namespace Kisaragi
 {
     class Program
     {
-        public static async Task Main(string[] args)
-            => new Program().MainAsync().GetAwaiter().GetResult();
+        public static async Task Main()
+            => await new Program().MainAsync();
 
         public readonly DiscordSocketClient client;
         private readonly CommandService commands = new CommandService();
@@ -33,6 +33,8 @@ namespace Kisaragi
         private async Task MainAsync()
         {
             client.MessageReceived += HandleCommandAsync;
+
+            await commands.AddModuleAsync<CommunicationModule>(null);
 
             await client.LoginAsync(TokenType.Bot, File.ReadAllText("Keys/token.txt"));
             StartTime = DateTime.Now;
